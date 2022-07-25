@@ -34,10 +34,20 @@ namespace Photo_paint
 
         public void SetCoords(int x, int y)
         {
-            X1 = Math.Min(x, CenterPosition.X);
-            X2 = Math.Max(x, CenterPosition.X);
-            Y1 = Math.Min(y, CenterPosition.Y);
-            Y2 = Math.Max(y, CenterPosition.Y);
+            if(ElementType == ElementType.Line)
+            {
+                X1 = CenterPosition.X;
+                Y1 = CenterPosition.Y;
+                X2 = x;
+                Y2 = y;
+            }
+            else
+            {
+                X1 = Math.Min(x, CenterPosition.X);
+                X2 = Math.Max(x, CenterPosition.X);
+                Y1 = Math.Min(y, CenterPosition.Y);
+                Y2 = Math.Max(y, CenterPosition.Y);
+            }
         }
 
         public void Draw(Graphics g)
@@ -50,7 +60,7 @@ namespace Photo_paint
             switch (ElementType)
             {
                 case ElementType.Line:
-                    g.DrawLine(pen, X1, Y1, width, height);
+                    g.DrawLine(pen, X1, Y1, X2, Y2);
                     break;
                 case ElementType.Rectangle:
                     g.DrawRectangle(pen, X1, Y1, width, height);
