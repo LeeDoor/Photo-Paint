@@ -31,6 +31,8 @@
             this.mainColorButton = new System.Windows.Forms.Button();
             this.secondaryColorButton = new System.Windows.Forms.Button();
             this.formTypeCombobox = new System.Windows.Forms.ComboBox();
+            this.pictureBox = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // mainColorButton
@@ -60,27 +62,37 @@
             "ellipse",
             "filled ellipse",
             "line"});
-            this.formTypeCombobox.Location = new System.Drawing.Point(89, 12);
+            this.formTypeCombobox.Location = new System.Drawing.Point(89, 51);
             this.formTypeCombobox.Name = "formTypeCombobox";
-            this.formTypeCombobox.Size = new System.Drawing.Size(114, 23);
+            this.formTypeCombobox.Size = new System.Drawing.Size(216, 23);
             this.formTypeCombobox.TabIndex = 1;
             this.formTypeCombobox.SelectedIndexChanged += new System.EventHandler(this.OnformTypeComboboxSelectedIndexChanged);
+            // 
+            // pictureBox
+            // 
+            this.pictureBox.Location = new System.Drawing.Point(12, 80);
+            this.pictureBox.Name = "pictureBox";
+            this.pictureBox.Size = new System.Drawing.Size(954, 637);
+            this.pictureBox.TabIndex = 2;
+            this.pictureBox.TabStop = false;
+            //this.pictureBox.BackColor = Color.Red;
+            this.pictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.OnPaint);
+            this.pictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OnMouseDown);
+            this.pictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.OnMouseMove);
+            this.pictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(978, 729);
+            this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.formTypeCombobox);
             this.Controls.Add(this.mainColorButton);
             this.Controls.Add(this.secondaryColorButton);
             this.Name = "MainForm";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.MainForm_Load);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.OnPaint);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OnMouseDown);
-            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.OnMouseMove);
-            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -90,5 +102,6 @@
         private Button mainColorButton;
         private Button secondaryColorButton;
         private ComboBox formTypeCombobox;
+        private PictureBox pictureBox;
     }
 }

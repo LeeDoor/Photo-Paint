@@ -4,7 +4,6 @@ namespace Photo_paint
 {
     public partial class MainForm : Form
     {
-        private Graphics g;
         private List<DrawingElement> drawingElements;
         private DrawingElement? curDrawingElement;
         private Color firstColor;
@@ -14,8 +13,6 @@ namespace Photo_paint
         public MainForm()
         {
             InitializeComponent();
-
-            g = CreateGraphics();
 
             drawingElements = new List<DrawingElement>();
 
@@ -31,13 +28,9 @@ namespace Photo_paint
             formTypeCombobox.Items.Add(ElementType.FilledEllipse);
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-
-        }
         private void OnPaint(object sender, PaintEventArgs e)
         {
-            g.Clear(secondColor);
+            Graphics g = e.Graphics;
             foreach (DrawingElement drawingElement in drawingElements)
             {
                 drawingElement.Draw(g);
@@ -51,7 +44,7 @@ namespace Photo_paint
         private void OnMouseDown(object sender, MouseEventArgs e)
         {
             curDrawingElement = new DrawingElement(type, new SolidBrush(firstColor), 5, e.Location.X, e.Location.Y);
-            Invalidate();
+            pictureBox.Invalidate();
         }
 
         private void OnMouseMove(object sender, MouseEventArgs e)
@@ -59,7 +52,7 @@ namespace Photo_paint
             if (curDrawingElement != null)
             {
                 curDrawingElement.SetCoords(e.Location.X, e.Location.Y);
-                Invalidate();
+                pictureBox.Invalidate();
             }
         }
 
@@ -78,7 +71,7 @@ namespace Photo_paint
             {
                 secondColor = dlg.Color;
             }
-            Invalidate();
+            pictureBox.Invalidate();
         }
 
         private void OnMainColorButtonClick(object sender, EventArgs e)
@@ -88,7 +81,7 @@ namespace Photo_paint
             {
                 firstColor = dlg.Color;
             }
-            Invalidate();
+            pictureBox.Invalidate();
         }
 
         private void OnformTypeComboboxSelectedIndexChanged(object sender, EventArgs e)
