@@ -9,7 +9,7 @@ namespace Photo_paint
         private DrawingElement? curDrawingElement;
         private Color firstColor;
         private Color secondColor;
-        private ElementType type;
+        private ElementType type = 0;
 
         public MainForm()
         {
@@ -50,7 +50,7 @@ namespace Photo_paint
 
         private void OnMouseDown(object sender, MouseEventArgs e)
         {
-            curDrawingElement = new DrawingElement(type, new SolidBrush(firstColor), 5, e.Location.X, e.Location.Y, e.Location.X, e.Location.Y);
+            curDrawingElement = new DrawingElement(type, new SolidBrush(firstColor), 5, e.Location.X, e.Location.Y);
             Invalidate();
         }
 
@@ -58,8 +58,7 @@ namespace Photo_paint
         {
             if (curDrawingElement != null)
             {
-                curDrawingElement.Width = e.Location.X - curDrawingElement.X;
-                curDrawingElement.Height = e.Location.Y - curDrawingElement.Y;
+                curDrawingElement.SetCoords(e.Location.X, e.Location.Y);
                 Invalidate();
             }
         }
