@@ -8,13 +8,13 @@ namespace Photo_paint
 {
     public class DrawingElement
     {
-        public ElementType ElementType { get; }
-        public Brush Brush { get; }
-        public float Thickness { get; }
-        public int X { get; }
-        public int Y { get; }
-        public int Width { get; }
-        public int Height { get; }
+        public ElementType ElementType { get; set; }
+        public Brush Brush { get; set; }
+        public float Thickness { get; set; }
+        public int X { get; set; }
+        public int Y { get; set; }
+        public int Width { get; set; }
+        public int Height { get; set; }
 
         public DrawingElement(ElementType elementType, Brush brush, float thickness, int x, int y, int width, int height)
         {
