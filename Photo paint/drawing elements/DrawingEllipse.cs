@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace Photo_paint
 {
-    public class DrawingRectangle : SizeFigures, IPenDrawing
+    public class DrawingEllipse : SizeFigures, IPenDrawing
     {
         public Pen Pen { get; set; }
 
-        public DrawingRectangle(int x, int y, Pen pen) : base(x, y)
+        public DrawingEllipse(int x, int y, Pen pen) : base(x, y)
         {
             Pen = pen;
         }
 
         public override void Draw(Graphics g)
         {
-            g.DrawRectangle(Pen, X1, Y1, Width, Height);
+            g.DrawEllipse(Pen, X1, Y1, Width, Height);
         }
     }
 }

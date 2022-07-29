@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Photo_paint.drawing_elements
+namespace Photo_paint
 {
     public class SizeFigures : DrawingElement
     {
@@ -20,7 +20,7 @@ namespace Photo_paint.drawing_elements
             Height = 0;
         }
 
-        public void SetCoords(int x, int y)
+        public override void SetCoords(int x, int y)
         {
             X1 = Math.Min(x, CenterPosition.X);
             Y1 = Math.Min(y, CenterPosition.Y);

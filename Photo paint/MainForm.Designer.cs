@@ -66,7 +66,6 @@
             this.formTypeCombobox.Name = "formTypeCombobox";
             this.formTypeCombobox.Size = new System.Drawing.Size(216, 23);
             this.formTypeCombobox.TabIndex = 1;
-            this.formTypeCombobox.SelectedIndexChanged += new System.EventHandler(this.OnformTypeComboboxSelectedIndexChanged);
             // 
             // pictureBox
             // 
@@ -75,7 +74,6 @@
             this.pictureBox.Size = new System.Drawing.Size(954, 637);
             this.pictureBox.TabIndex = 2;
             this.pictureBox.TabStop = false;
-            //this.pictureBox.BackColor = Color.Red;
             this.pictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.OnPaint);
             this.pictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OnMouseDown);
             this.pictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.OnMouseMove);

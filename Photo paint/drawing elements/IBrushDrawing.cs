@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Photo_paint.drawing_elements
+namespace Photo_paint
 {
     public interface IBrushDrawing
     {

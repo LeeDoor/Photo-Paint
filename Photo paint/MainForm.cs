@@ -2,92 +2,108 @@ using System.Drawing;
 
 namespace Photo_paint
 {
-    public partial class MainForm : Form
-    {
-        private List<DrawingElement> drawingElements;
-        private DrawingElement? curDrawingElement;
-        private Color firstColor;
-        private Color secondColor;
-        private ElementType type = 0;
+	public partial class MainForm : Form
+	{
+		private List<DrawingElement> drawingElements;
+		private DrawingElement? curDrawingElement;
+		private Color firstColor;
+		private Color secondColor;
+		private float thickness;
+		public MainForm()
+		{
+			InitializeComponent();
 
-        public MainForm()
-        {
-            InitializeComponent();
+			drawingElements = new List<DrawingElement>();
 
-            drawingElements = new List<DrawingElement>();
+			thickness = 4;
 
-            firstColor = Color.Black;
-            secondColor = Color.White;
-            type = ElementType.Line;
+			firstColor = Color.Black;
+			secondColor = Color.White;
 
-            formTypeCombobox.Items.Clear();
-            formTypeCombobox.Items.Add(ElementType.Line);
-            formTypeCombobox.Items.Add(ElementType.Rectangle);
-            formTypeCombobox.Items.Add(ElementType.FilledRectangle);
-            formTypeCombobox.Items.Add(ElementType.Ellipse);
-            formTypeCombobox.Items.Add(ElementType.FilledEllipse);
-        }
+			formTypeCombobox.Items.Clear();
+			formTypeCombobox.Items.Add(DrawingType.Line);
+			formTypeCombobox.Items.Add(DrawingType.Rectangle);
+			formTypeCombobox.Items.Add(DrawingType.FilledRectangle);
+			formTypeCombobox.Items.Add(DrawingType.Ellipse);
+			formTypeCombobox.Items.Add(DrawingType.FilledEllipse);
+		}
 
-        private void OnPaint(object sender, PaintEventArgs e)
-        {
-            Graphics g = e.Graphics;
-            foreach (DrawingElement drawingElement in drawingElements)
-            {
-                drawingElement.Draw(g);
-            }
-            curDrawingElement?.Draw(g);
+		private void OnPaint(object sender, PaintEventArgs e)
+		{
+			Graphics g = e.Graphics;
+			foreach (DrawingElement drawingElement in drawingElements)
+			{
+				drawingElement.Draw(g);
+			}
+			curDrawingElement?.Draw(g);
 
-            mainColorButton.BackColor = firstColor;
-            secondaryColorButton.BackColor = secondColor;
-        }
+			mainColorButton.BackColor = firstColor;
+			secondaryColorButton.BackColor = secondColor;
+		}
 
-        private void OnMouseDown(object sender, MouseEventArgs e)
-        {
-            curDrawingElement = new DrawingElement(type, new SolidBrush(firstColor), 5, e.Location.X, e.Location.Y);
-            pictureBox.Invalidate();
-        }
+		private void OnMouseDown(object sender, MouseEventArgs e)
+		{
+			if(formTypeCombobox.SelectedItem is DrawingType type)
+			{
+				Brush brush = new SolidBrush(firstColor);
+				Pen pen = new Pen(brush, thickness);
+				switch (type)
+				{
+					case DrawingType.Line:
+						curDrawingElement = new DrawingLine(e.Location.X, e.Location.Y, pen);
+						break;
+					case DrawingType.Rectangle:
+						curDrawingElement = new DrawingRectangle(e.Location.X, e.Location.Y, pen);
+						break;
+					case DrawingType.FilledRectangle:
+						curDrawingElement = new DrawingFilledRectangle(e.Location.X, e.Location.Y, brush);
+						break;
+					case DrawingType.Ellipse:
+						curDrawingElement = new DrawingEllipse(e.Location.X, e.Location.Y, pen);
+						break;
+					case DrawingType.FilledEllipse:
+						curDrawingElement = new DrawingFilledEllipse(e.Location.X, e.Location.Y, brush);
+						break;
+				}
+			}
+			pictureBox.Invalidate();
+		}
 
-        private void OnMouseMove(object sender, MouseEventArgs e)
-        {
-            if (curDrawingElement != null)
-            {
-                curDrawingElement.SetCoords(e.Location.X, e.Location.Y);
-                pictureBox.Invalidate();
-            }
-        }
+		private void OnMouseMove(object sender, MouseEventArgs e)
+		{
+			if (curDrawingElement != null)
+			{
+				curDrawingElement.SetCoords(e.Location.X, e.Location.Y);
+				pictureBox.Invalidate();
+			}
+		}
 
-        private void OnMouseUp(object sender, MouseEventArgs e)
-        {
-            OnMouseMove(this, e);
-            if (curDrawingElement != null) 
-                drawingElements.Add(curDrawingElement);
-            curDrawingElement = null;
-        }
+		private void OnMouseUp(object sender, MouseEventArgs e)
+		{
+			OnMouseMove(this, e);
+			if (curDrawingElement != null) 
+				drawingElements.Add(curDrawingElement);
+			curDrawingElement = null;
+		}
 
-        private void OnSecondaryColorButtonClick(object sender, EventArgs e)
-        {
-            ColorDialog dlg = new ColorDialog();
-            if(dlg.ShowDialog() == DialogResult.OK)
-            {
-                secondColor = dlg.Color;
-            }
-            pictureBox.Invalidate();
-        }
+		private void OnSecondaryColorButtonClick(object sender, EventArgs e)
+		{
+			ColorDialog dlg = new ColorDialog();
+			if(dlg.ShowDialog() == DialogResult.OK)
+			{
+				secondColor = dlg.Color;
+			}
+			pictureBox.Invalidate();
+		}
 
-        private void OnMainColorButtonClick(object sender, EventArgs e)
-        {
-            ColorDialog dlg = new ColorDialog();
-            if (dlg.ShowDialog() == DialogResult.OK)
-            {
-                firstColor = dlg.Color;
-            }
-            pictureBox.Invalidate();
-        }
-
-        private void OnformTypeComboboxSelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (formTypeCombobox.SelectedItem is not ElementType element) return;
-            type = element;
-        }
-    }
+		private void OnMainColorButtonClick(object sender, EventArgs e)
+		{
+			ColorDialog dlg = new ColorDialog();
+			if (dlg.ShowDialog() == DialogResult.OK)
+			{
+				firstColor = dlg.Color;
+			}
+			pictureBox.Invalidate();
+		}
+	}
 }

@@ -19,5 +19,6 @@ namespace Photo_paint
         }
 
         public abstract void Draw(Graphics g);
+        public abstract void SetCoords(int x, int y);
     }
 }

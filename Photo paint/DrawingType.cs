@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace Photo_paint
 {
-    public interface IPenDrawing
+    public enum DrawingType
     {
-        public Pen Pen { get; set; }
+        Line,
+        Rectangle,
+        FilledRectangle,
+        Ellipse,
+        FilledEllipse
     }
 }

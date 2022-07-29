@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Photo_paint.drawing_elements
+namespace Photo_paint
 {
     public class DoubleCoords : DrawingElement
     {
@@ -22,7 +22,7 @@ namespace Photo_paint.drawing_elements
             return;
         }
 
-        public void SetCoords(int x, int y)
+        public override void SetCoords(int x, int y)
         {
             X2 = x; 
             Y2 = y; 
