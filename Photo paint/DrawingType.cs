@@ -12,6 +12,7 @@ namespace Photo_paint
         Rectangle,
         FilledRectangle,
         Ellipse,
-        FilledEllipse
+        FilledEllipse,
+        Brush
     }
 }

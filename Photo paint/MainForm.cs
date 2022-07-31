@@ -6,6 +6,7 @@ namespace Photo_paint
 	{
 		private List<DrawingElement> drawingElements;
 		private DrawingElement? curDrawingElement;
+		private bool isDrawing;
 		private Color firstColor;
 		private Color secondColor;
 		private float thickness;
@@ -14,7 +15,7 @@ namespace Photo_paint
 			InitializeComponent();
 
 			drawingElements = new List<DrawingElement>();
-
+			isDrawing = false;
 			thickness = 4;
 
 			firstColor = Color.Black;
@@ -26,6 +27,7 @@ namespace Photo_paint
 			formTypeCombobox.Items.Add(DrawingType.FilledRectangle);
 			formTypeCombobox.Items.Add(DrawingType.Ellipse);
 			formTypeCombobox.Items.Add(DrawingType.FilledEllipse);
+			formTypeCombobox.Items.Add(DrawingType.Brush);
 		}
 
 		private void OnPaint(object sender, PaintEventArgs e)
@@ -35,56 +37,64 @@ namespace Photo_paint
 			{
 				drawingElement.Draw(g);
 			}
-			curDrawingElement?.Draw(g);
-
 			mainColorButton.BackColor = firstColor;
 			secondaryColorButton.BackColor = secondColor;
 		}
 
 		private void OnMouseDown(object sender, MouseEventArgs e)
 		{
-			if(formTypeCombobox.SelectedItem is DrawingType type)
+			if (formTypeCombobox.SelectedItem is not DrawingType type) return;
+
+			Brush brush = new SolidBrush(firstColor);
+			Pen pen = new Pen(brush, thickness);
+			switch (type)
 			{
-				Brush brush = new SolidBrush(firstColor);
-				Pen pen = new Pen(brush, thickness);
-				switch (type)
-				{
-					case DrawingType.Line:
-						curDrawingElement = new DrawingLine(e.Location.X, e.Location.Y, pen);
-						break;
-					case DrawingType.Rectangle:
-						curDrawingElement = new DrawingRectangle(e.Location.X, e.Location.Y, pen);
-						break;
-					case DrawingType.FilledRectangle:
-						curDrawingElement = new DrawingFilledRectangle(e.Location.X, e.Location.Y, brush);
-						break;
-					case DrawingType.Ellipse:
-						curDrawingElement = new DrawingEllipse(e.Location.X, e.Location.Y, pen);
-						break;
-					case DrawingType.FilledEllipse:
-						curDrawingElement = new DrawingFilledEllipse(e.Location.X, e.Location.Y, brush);
-						break;
-				}
+				case DrawingType.Line:
+					curDrawingElement = new DrawingLine(e.Location.X, e.Location.Y, pen);
+					break;
+				case DrawingType.Rectangle:
+					curDrawingElement = new DrawingRectangle(e.Location.X, e.Location.Y, pen);
+					break;
+				case DrawingType.FilledRectangle:
+					curDrawingElement = new DrawingFilledRectangle(e.Location.X, e.Location.Y, brush);
+					break;
+				case DrawingType.Ellipse:
+					curDrawingElement = new DrawingEllipse(e.Location.X, e.Location.Y, pen);
+					break;
+				case DrawingType.FilledEllipse:
+					curDrawingElement = new DrawingFilledEllipse(e.Location.X, e.Location.Y, brush);
+					break;
+				case DrawingType.Brush:
+					curDrawingElement = new DrawingBrush (e.Location.X, e.Location.Y, pen);
+					break;
 			}
+			if (curDrawingElement != null)
+				drawingElements.Add(curDrawingElement);
+			isDrawing = true;
 			pictureBox.Invalidate();
+		}
+
+        private void ResetCurElementCoords(int x, int y)
+        {
+			if(curDrawingElement != null)
+				curDrawingElement.SetCoords(x, y);
 		}
 
 		private void OnMouseMove(object sender, MouseEventArgs e)
 		{
-			if (curDrawingElement != null)
+			if (isDrawing)
 			{
-				curDrawingElement.SetCoords(e.Location.X, e.Location.Y);
+				ResetCurElementCoords(e.Location.X, e.Location.Y);
 				pictureBox.Invalidate();
 			}
 		}
 
 		private void OnMouseUp(object sender, MouseEventArgs e)
 		{
-			if (curDrawingElement != null)
+			if (isDrawing)
 			{
-				curDrawingElement.SetCoords(e.Location.X, e.Location.Y);
-				drawingElements.Add(curDrawingElement);
-				curDrawingElement = null;
+				ResetCurElementCoords(e.Location.X, e.Location.Y);
+				isDrawing = false;
 				pictureBox.Invalidate();
 			}
 		}

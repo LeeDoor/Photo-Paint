@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Photo_paint
 {
-    public class SizeFigures : DrawingElement
+    public abstract class SizeFigures : DrawingElement
     {
-
+        public override bool KeepDrawing  => false; 
         public Point CenterPosition { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
@@ -29,11 +29,6 @@ namespace Photo_paint
 
             Width = X2 - X1;
             Height = Y2 - Y1;
-        }
-
-        public override void Draw(Graphics g)
-        {
-            return;
         }
     }
 }

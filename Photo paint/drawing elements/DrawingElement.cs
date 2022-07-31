@@ -8,6 +8,7 @@ namespace Photo_paint
 {
     public abstract class DrawingElement
     {
+        public abstract bool KeepDrawing { get; }
         public int X1 { get; set; }
         public int Y1 { get; set; }
 

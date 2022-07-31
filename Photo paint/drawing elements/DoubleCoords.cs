@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Photo_paint
 {
-    public class DoubleCoords : DrawingElement
+    public abstract class DoubleCoords : DrawingElement
     {
+        public override bool KeepDrawing => false; 
         public int X2 { get; set; }
         public int Y2 { get; set; }
 
@@ -15,11 +16,6 @@ namespace Photo_paint
         {
             X2 = x;
             Y2 = y;
-        }
-
-        public override void Draw(Graphics g)
-        {
-            return;
         }
 
         public override void SetCoords(int x, int y)
