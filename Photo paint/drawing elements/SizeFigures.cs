@@ -6,11 +6,29 @@ using System.Threading.Tasks;
 
 namespace Photo_paint
 {
-    public abstract class SizeFigures : DrawingElement
+    /// <summary>
+    /// родительский класс, определяющий объекты, 
+    /// координаты которых могут быть определены 
+    /// только координатами левой верхней точки, 
+    /// ширины и высоты. содержит реализацию метода SetCoords
+    /// </summary>
+    public abstract class SizeFigures : DrawingObject
     {
         public override bool KeepDrawing  => false; 
+
+        /// <summary>
+        /// Center position of figure, where started drawing
+        /// </summary>
         public Point CenterPosition { get; set; }
+
+        /// <summary>
+        /// Width of this figure
+        /// </summary>
         public int Width { get; set; }
+
+        /// <summary>
+        /// Height of this figure
+        /// </summary>
         public int Height { get; set; }
 
         public SizeFigures(int x, int y) : base(x, y)

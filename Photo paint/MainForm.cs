@@ -4,17 +4,44 @@ namespace Photo_paint
 {
 	public partial class MainForm : Form
 	{
-		private List<DrawingElement> drawingElements;
-		private DrawingElement? curDrawingElement;
+		/// <summary>
+		/// list of elements we need to draw
+		/// </summary>
+		private List<DrawingObject> drawingElements;
+
+		/// <summary>
+		/// current element we are drawing or editing
+		/// </summary>
+		private DrawingObject? curDrawingElement;
+
+		/// <summary>
+		/// true if we are drawing curDrawingElement rn
+		/// </summary>
 		private bool isDrawing;
+
+		/// <summary>
+		/// primary color. needed to draw smth
+		/// </summary>
 		private Color firstColor;
+
+		/// <summary>
+		/// secondary color. needed to erase
+		/// </summary>
 		private Color secondColor;
+
+		/// <summary>
+		/// thickness of pens we use
+		/// </summary>
 		private float thickness;
+
+		/// <summary>
+		/// constructor
+		/// </summary>
 		public MainForm()
 		{
 			InitializeComponent();
 
-			drawingElements = new List<DrawingElement>();
+			drawingElements = new List<DrawingObject>();
 			isDrawing = false;
 			thickness = 4;
 
@@ -30,10 +57,13 @@ namespace Photo_paint
 			formTypeCombobox.Items.Add(DrawingType.Brush);
 		}
 
+		/// <summary>
+		/// screen update
+		/// </summary>
 		private void OnPaint(object sender, PaintEventArgs e)
 		{
 			Graphics g = e.Graphics;
-			foreach (DrawingElement drawingElement in drawingElements)
+			foreach (DrawingObject drawingElement in drawingElements)
 			{
 				drawingElement.Draw(g);
 			}
@@ -74,17 +104,11 @@ namespace Photo_paint
 			pictureBox.Invalidate();
 		}
 
-        private void ResetCurElementCoords(int x, int y)
-        {
-			if(curDrawingElement != null)
-				curDrawingElement.SetCoords(x, y);
-		}
-
 		private void OnMouseMove(object sender, MouseEventArgs e)
 		{
 			if (isDrawing)
 			{
-				ResetCurElementCoords(e.Location.X, e.Location.Y);
+				curDrawingElement?.SetCoords(e.Location.X, e.Location.Y);
 				pictureBox.Invalidate();
 			}
 		}
@@ -93,7 +117,7 @@ namespace Photo_paint
 		{
 			if (isDrawing)
 			{
-				ResetCurElementCoords(e.Location.X, e.Location.Y);
+				curDrawingElement?.SetCoords(e.Location.X, e.Location.Y);
 				isDrawing = false;
 				pictureBox.Invalidate();
 			}
