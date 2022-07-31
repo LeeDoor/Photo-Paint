@@ -80,10 +80,13 @@ namespace Photo_paint
 
 		private void OnMouseUp(object sender, MouseEventArgs e)
 		{
-			OnMouseMove(this, e);
-			if (curDrawingElement != null) 
+			if (curDrawingElement != null)
+			{
+				curDrawingElement.SetCoords(e.Location.X, e.Location.Y);
 				drawingElements.Add(curDrawingElement);
-			curDrawingElement = null;
+				curDrawingElement = null;
+				pictureBox.Invalidate();
+			}
 		}
 
 		private void OnSecondaryColorButtonClick(object sender, EventArgs e)
