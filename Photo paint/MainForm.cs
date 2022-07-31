@@ -142,5 +142,10 @@ namespace Photo_paint
 			}
 			pictureBox.Invalidate();
 		}
-	}
+
+        private void OnThicknessCountDownValueChanged(object sender, EventArgs e)
+        {
+			thickness = (float)thicknessCountDown.Value;
+        }
+    }
 }

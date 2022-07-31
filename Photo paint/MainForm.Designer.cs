@@ -32,7 +32,9 @@
             this.secondaryColorButton = new System.Windows.Forms.Button();
             this.formTypeCombobox = new System.Windows.Forms.ComboBox();
             this.pictureBox = new System.Windows.Forms.PictureBox();
+            this.thicknessCountDown = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.thicknessCountDown)).BeginInit();
             this.SuspendLayout();
             // 
             // mainColorButton
@@ -79,11 +81,35 @@
             this.pictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.OnMouseMove);
             this.pictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
             // 
+            // thicknessCountDown
+            // 
+            this.thicknessCountDown.Location = new System.Drawing.Point(89, 22);
+            this.thicknessCountDown.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.thicknessCountDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.thicknessCountDown.Name = "thicknessCountDown";
+            this.thicknessCountDown.Size = new System.Drawing.Size(52, 23);
+            this.thicknessCountDown.TabIndex = 3;
+            this.thicknessCountDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.thicknessCountDown.ValueChanged += new System.EventHandler(this.OnThicknessCountDownValueChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(978, 729);
+            this.Controls.Add(this.thicknessCountDown);
             this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.formTypeCombobox);
             this.Controls.Add(this.mainColorButton);
@@ -91,6 +117,7 @@
             this.Name = "MainForm";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.thicknessCountDown)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -101,5 +128,6 @@
         private Button secondaryColorButton;
         private ComboBox formTypeCombobox;
         private PictureBox pictureBox;
+        private NumericUpDown thicknessCountDown;
     }
 }
