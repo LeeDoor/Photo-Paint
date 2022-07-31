@@ -33,13 +33,14 @@
             this.formTypeCombobox = new System.Windows.Forms.ComboBox();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.thicknessCountDown = new System.Windows.Forms.NumericUpDown();
+            this.gobackButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.thicknessCountDown)).BeginInit();
             this.SuspendLayout();
             // 
             // mainColorButton
             // 
-            this.mainColorButton.Location = new System.Drawing.Point(12, 12);
+            this.mainColorButton.Location = new System.Drawing.Point(65, 12);
             this.mainColorButton.Name = "mainColorButton";
             this.mainColorButton.Size = new System.Drawing.Size(50, 50);
             this.mainColorButton.TabIndex = 0;
@@ -48,7 +49,7 @@
             // 
             // secondaryColorButton
             // 
-            this.secondaryColorButton.Location = new System.Drawing.Point(23, 24);
+            this.secondaryColorButton.Location = new System.Drawing.Point(76, 24);
             this.secondaryColorButton.Name = "secondaryColorButton";
             this.secondaryColorButton.Size = new System.Drawing.Size(50, 50);
             this.secondaryColorButton.TabIndex = 0;
@@ -64,7 +65,7 @@
             "ellipse",
             "filled ellipse",
             "line"});
-            this.formTypeCombobox.Location = new System.Drawing.Point(89, 51);
+            this.formTypeCombobox.Location = new System.Drawing.Point(142, 51);
             this.formTypeCombobox.Name = "formTypeCombobox";
             this.formTypeCombobox.Size = new System.Drawing.Size(216, 23);
             this.formTypeCombobox.TabIndex = 1;
@@ -83,7 +84,7 @@
             // 
             // thicknessCountDown
             // 
-            this.thicknessCountDown.Location = new System.Drawing.Point(89, 22);
+            this.thicknessCountDown.Location = new System.Drawing.Point(142, 22);
             this.thicknessCountDown.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -104,11 +105,23 @@
             0});
             this.thicknessCountDown.ValueChanged += new System.EventHandler(this.OnThicknessCountDownValueChanged);
             // 
+            // gobackButton
+            // 
+            this.gobackButton.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.gobackButton.Location = new System.Drawing.Point(12, 11);
+            this.gobackButton.Name = "gobackButton";
+            this.gobackButton.Size = new System.Drawing.Size(20, 20);
+            this.gobackButton.TabIndex = 4;
+            this.gobackButton.Text = "<";
+            this.gobackButton.UseVisualStyleBackColor = true;
+            this.gobackButton.Click += new System.EventHandler(this.OnGobackButtonClick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(978, 729);
+            this.Controls.Add(this.gobackButton);
             this.Controls.Add(this.thicknessCountDown);
             this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.formTypeCombobox);
@@ -129,5 +142,6 @@
         private ComboBox formTypeCombobox;
         private PictureBox pictureBox;
         private NumericUpDown thicknessCountDown;
+        private Button gobackButton;
     }
 }

@@ -1,9 +1,12 @@
 using System.Drawing;
+using System.Windows.Input;
 
 namespace Photo_paint
 {
 	public partial class MainForm : Form
 	{
+		private bool ctrlPressed = false;
+
 		/// <summary>
 		/// list of elements we need to draw
 		/// </summary>
@@ -147,5 +150,18 @@ namespace Photo_paint
         {
 			thickness = (float)thicknessCountDown.Value;
         }
+
+		private void StepBack()
+        {
+			var lastelement = drawingElements.LastOrDefault();
+			if (lastelement != null)
+				drawingElements.Remove(lastelement);
+        }
+
+        private void OnGobackButtonClick(object sender, EventArgs e)
+        {
+			StepBack();
+			pictureBox.Invalidate();
+		}
     }
 }
