@@ -17,8 +17,6 @@ namespace Photo_paint
 
         public override void Draw(Graphics g)
         {
-            if (Points.Count == 0) return;
-
             for (int i = 0; i < Points.Count - 1; i++)
             {
                 ///we need this ellipses for normal brush visualisation

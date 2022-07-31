@@ -23,6 +23,7 @@ namespace Photo_paint
         public MultiDots(int x, int y) : base(x, y)
         {
             Points = new List<Point>();
+            Points.Add(new Point(x, y));
         }
 
         public override void SetCoords(int x, int y)

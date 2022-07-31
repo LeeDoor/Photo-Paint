@@ -5,12 +5,18 @@ namespace Photo_paint
 {
 	public partial class MainForm : Form
 	{
-		private bool ctrlPressed = false;
-
 		/// <summary>
 		/// list of elements we need to draw
 		/// </summary>
 		private List<DrawingObject> drawingElements;
+
+		/// <summary>
+		/// the number of canceled elements at the 
+		/// end of the array that will not be drawn. 
+		/// when drawing a new object, the array 
+		/// cuts off these elements
+		/// </summary>
+		private int borderIndex = 0;
 
 		/// <summary>
 		/// current element we are drawing or editing
@@ -61,14 +67,48 @@ namespace Photo_paint
 		}
 
 		/// <summary>
+		/// adds 1 to border index
+		/// </summary>
+		private void StepBack()
+		{
+			if (borderIndex < drawingElements.Count)
+			{
+				borderIndex++;
+			}
+		}
+
+		/// <summary>
+		/// removes 1 from border index
+		/// </summary>
+		private void StepForward()
+		{
+			if (borderIndex > 0)
+			{
+				borderIndex--;
+			}
+		}
+
+		/// <summary>
+		/// cuts off from the tail the number of elements equal to borderIndex
+		/// </summary>
+		private void CutTailElements()
+        {
+			for(int i = 0; i < borderIndex; i++)
+            {
+				drawingElements.Remove(drawingElements.Last());
+            }
+			borderIndex = 0; 
+		}
+
+		/// <summary>
 		/// screen update
 		/// </summary>
 		private void OnPaint(object sender, PaintEventArgs e)
 		{
 			Graphics g = e.Graphics;
-			foreach (DrawingObject drawingElement in drawingElements)
+			for(int i = 0; i < drawingElements.Count - borderIndex; i++)
 			{
-				drawingElement.Draw(g);
+                drawingElements[i].Draw(g);
 			}
 			mainColorButton.BackColor = firstColor;
 			secondaryColorButton.BackColor = secondColor;
@@ -77,6 +117,8 @@ namespace Photo_paint
 		private void OnMouseDown(object sender, MouseEventArgs e)
 		{
 			if (formTypeCombobox.SelectedItem is not DrawingType type) return;
+
+			CutTailElements();
 
 			Brush brush = new SolidBrush(firstColor);
 			Pen pen = new Pen(brush, thickness);
@@ -151,16 +193,15 @@ namespace Photo_paint
 			thickness = (float)thicknessCountDown.Value;
         }
 
-		private void StepBack()
-        {
-			var lastelement = drawingElements.LastOrDefault();
-			if (lastelement != null)
-				drawingElements.Remove(lastelement);
-        }
-
         private void OnGobackButtonClick(object sender, EventArgs e)
         {
 			StepBack();
+			pictureBox.Invalidate();
+		}
+
+        private void OnGoforwardButtonClick(object sender, EventArgs e)
+        {
+			StepForward();
 			pictureBox.Invalidate();
 		}
     }

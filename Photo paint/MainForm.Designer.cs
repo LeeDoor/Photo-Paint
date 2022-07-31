@@ -34,6 +34,7 @@
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.thicknessCountDown = new System.Windows.Forms.NumericUpDown();
             this.gobackButton = new System.Windows.Forms.Button();
+            this.goforwardButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.thicknessCountDown)).BeginInit();
             this.SuspendLayout();
@@ -116,11 +117,23 @@
             this.gobackButton.UseVisualStyleBackColor = true;
             this.gobackButton.Click += new System.EventHandler(this.OnGobackButtonClick);
             // 
+            // goforwardButton
+            // 
+            this.goforwardButton.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.goforwardButton.Location = new System.Drawing.Point(12, 37);
+            this.goforwardButton.Name = "goforwardButton";
+            this.goforwardButton.Size = new System.Drawing.Size(20, 20);
+            this.goforwardButton.TabIndex = 4;
+            this.goforwardButton.Text = ">";
+            this.goforwardButton.UseVisualStyleBackColor = true;
+            this.goforwardButton.Click += new System.EventHandler(this.OnGoforwardButtonClick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(978, 729);
+            this.Controls.Add(this.goforwardButton);
             this.Controls.Add(this.gobackButton);
             this.Controls.Add(this.thicknessCountDown);
             this.Controls.Add(this.pictureBox);
@@ -143,5 +156,6 @@
         private PictureBox pictureBox;
         private NumericUpDown thicknessCountDown;
         private Button gobackButton;
+        private Button goforwardButton;
     }
 }
