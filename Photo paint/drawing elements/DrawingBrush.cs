@@ -9,6 +9,11 @@ namespace Photo_paint
     public class DrawingBrush : MultiDots, IPenDrawing
     {
         public Pen Pen { get; set; }
+        public override Color Color
+        {
+            get => Pen.Color;
+            set => Pen.Color = value;
+        }
 
         public DrawingBrush(int x, int y, Pen pen) : base(x, y)
         {

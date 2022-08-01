@@ -11,6 +11,8 @@ namespace Photo_paint
     /// </summary>
     public abstract class DrawingObject
     {
+        public abstract Color Color { get; set; }
+
         /// <summary>
         /// true if we should keep drawing element after mouse button release
         /// </summary>

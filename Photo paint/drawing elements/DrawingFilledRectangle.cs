@@ -8,9 +8,15 @@ namespace Photo_paint
 {
     public class DrawingFilledRectangle : SizeFigures, IBrushDrawing
     {
-        public Brush Brush { get; set; }
+        public SolidBrush Brush { get; set; }
 
-        public DrawingFilledRectangle(int x, int y, Brush brush) : base(x, y)
+        public override Color Color
+        {
+            get => Brush.Color;
+            set => Brush.Color = value;
+        }
+
+        public DrawingFilledRectangle(int x, int y, SolidBrush brush) : base(x, y)
         {
             Brush = brush;
         }

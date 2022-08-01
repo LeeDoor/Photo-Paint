@@ -12,6 +12,6 @@ namespace Photo_paint
     /// </summary>
     public interface IBrushDrawing
     {
-        public Brush Brush { get; set; }
+        public SolidBrush Brush { get; set; }
     }
 }

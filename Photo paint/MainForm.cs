@@ -115,8 +115,8 @@ namespace Photo_paint
 
 			//if we press left mouse button, we use first color to draw
 			//else we use second
-			Brush brush1;
-			Brush brush2;
+			SolidBrush brush1;
+			SolidBrush brush2;
 			if (isLeft)
             {
 				brush1 = new SolidBrush(firstColor);
@@ -196,6 +196,8 @@ namespace Photo_paint
 			{
 				firstColor = dlg.Color;
 			}
+			if(curDrawingElement != null)
+				curDrawingElement.Color = firstColor;
 			pictureBox.Invalidate();
 		}
 

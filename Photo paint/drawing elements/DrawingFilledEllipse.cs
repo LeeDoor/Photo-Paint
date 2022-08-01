@@ -8,9 +8,15 @@ namespace Photo_paint
 {
     public class DrawingFilledEllipse : SizeFigures, IBrushDrawing
     {
-        public Brush Brush { get; set; }
+        public SolidBrush Brush { get; set; }
 
-        public DrawingFilledEllipse(int x, int y, Brush brush) : base(x, y)
+        public override Color Color
+        {
+            get => Brush.Color;
+            set => Brush.Color = value;
+        }
+
+        public DrawingFilledEllipse(int x, int y, SolidBrush brush) : base(x, y)
         {
             Brush = brush;
         }

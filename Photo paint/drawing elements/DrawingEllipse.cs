@@ -10,6 +10,12 @@ namespace Photo_paint
     {
         public Pen Pen { get; set; }
 
+        public override Color Color
+        {
+            get => Pen.Color;
+            set => Pen.Color = value;
+        }
+
         public DrawingEllipse(int x, int y, Pen pen) : base(x, y)
         {
             Pen = pen;
