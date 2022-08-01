@@ -108,30 +108,50 @@ namespace Photo_paint
 
 		private void OnMouseDown(object sender, MouseEventArgs e)
 		{
+			if (listView1.SelectedItems.Count <= 0) return;
 			var type = (DrawingType)listView1.SelectedItems[0].Index;
 			CutTailElements();
+			bool isLeft = e.Button == MouseButtons.Left;
 
-			Brush brush = new SolidBrush(firstColor);
-			Pen pen = new Pen(brush, thickness);
+			//if we press left mouse button, we use first color to draw
+			//else we use second
+			Brush brush1;
+			Brush brush2;
+			if (isLeft)
+            {
+				brush1 = new SolidBrush(firstColor);
+				brush2 = new SolidBrush(secondColor);
+			}
+            else
+            {
+				brush1 = new SolidBrush(secondColor);
+				brush2 = new SolidBrush(firstColor);
+			}
+
+			Pen pen1 = new Pen(brush1, thickness);
+			Pen pen2 = new Pen(brush2, thickness);
 			switch (type)
 			{
 				case DrawingType.Line:
-					curDrawingElement = new DrawingLine(e.Location.X, e.Location.Y, pen);
+					curDrawingElement = new DrawingLine(e.Location.X, e.Location.Y, pen1);
 					break;
 				case DrawingType.Rectangle:
-					curDrawingElement = new DrawingRectangle(e.Location.X, e.Location.Y, pen);
+					curDrawingElement = new DrawingRectangle(e.Location.X, e.Location.Y, pen1);
 					break;
 				case DrawingType.FilledRectangle:
-					curDrawingElement = new DrawingFilledRectangle(e.Location.X, e.Location.Y, brush);
+					curDrawingElement = new DrawingFilledRectangle(e.Location.X, e.Location.Y, brush1);
 					break;
 				case DrawingType.Ellipse:
-					curDrawingElement = new DrawingEllipse(e.Location.X, e.Location.Y, pen);
+					curDrawingElement = new DrawingEllipse(e.Location.X, e.Location.Y, pen1);
 					break;
 				case DrawingType.FilledEllipse:
-					curDrawingElement = new DrawingFilledEllipse(e.Location.X, e.Location.Y, brush);
+					curDrawingElement = new DrawingFilledEllipse(e.Location.X, e.Location.Y, brush1);
 					break;
 				case DrawingType.Brush:
-					curDrawingElement = new DrawingBrush (e.Location.X, e.Location.Y, pen);
+					curDrawingElement = new DrawingBrush(e.Location.X, e.Location.Y, pen1);
+					break;
+				case DrawingType.Eraser:
+					curDrawingElement = new DrawingBrush(e.Location.X, e.Location.Y, pen2);
 					break;
 			}
 			if (curDrawingElement != null)

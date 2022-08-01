@@ -35,6 +35,7 @@
             System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("", 4);
             System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("", 2);
             System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("", 3);
+            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("", 6);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.mainColorButton = new System.Windows.Forms.Button();
             this.secondaryColorButton = new System.Windows.Forms.Button();
@@ -69,6 +70,7 @@
             // 
             // pictureBox
             // 
+            this.pictureBox.BackColor = System.Drawing.Color.White;
             this.pictureBox.Location = new System.Drawing.Point(12, 80);
             this.pictureBox.Name = "pictureBox";
             this.pictureBox.Size = new System.Drawing.Size(954, 637);
@@ -82,7 +84,7 @@
             // thicknessCountDown
             // 
             this.thicknessCountDown.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.thicknessCountDown.Location = new System.Drawing.Point(433, 22);
+            this.thicknessCountDown.Location = new System.Drawing.Point(237, 20);
             this.thicknessCountDown.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -135,12 +137,13 @@
             listViewItem3,
             listViewItem4,
             listViewItem5,
-            listViewItem6});
+            listViewItem6,
+            listViewItem7});
             this.listView1.LargeImageList = this.imageList1;
-            this.listView1.Location = new System.Drawing.Point(562, 12);
+            this.listView1.Location = new System.Drawing.Point(366, 2);
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(404, 62);
+            this.listView1.Size = new System.Drawing.Size(600, 72);
             this.listView1.SmallImageList = this.imageList1;
             this.listView1.TabIndex = 5;
             this.listView1.TileSize = new System.Drawing.Size(60, 60);
@@ -158,12 +161,13 @@
             this.imageList1.Images.SetKeyName(3, "line icon.png");
             this.imageList1.Images.SetKeyName(4, "rectangle icon.png");
             this.imageList1.Images.SetKeyName(5, "ellipse icon.png");
+            this.imageList1.Images.SetKeyName(6, "eraser icon.png");
             // 
             // thicknessLabel
             // 
             this.thicknessLabel.AutoSize = true;
             this.thicknessLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.thicknessLabel.Location = new System.Drawing.Point(329, 32);
+            this.thicknessLabel.Location = new System.Drawing.Point(133, 30);
             this.thicknessLabel.Name = "thicknessLabel";
             this.thicknessLabel.Size = new System.Drawing.Size(98, 25);
             this.thicknessLabel.TabIndex = 6;
