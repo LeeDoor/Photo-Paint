@@ -46,6 +46,7 @@
             this.listView1 = new System.Windows.Forms.ListView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.thicknessLabel = new System.Windows.Forms.Label();
+            this.clearButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.thicknessCountDown)).BeginInit();
             this.SuspendLayout();
@@ -83,8 +84,8 @@
             // 
             // thicknessCountDown
             // 
-            this.thicknessCountDown.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.thicknessCountDown.Location = new System.Drawing.Point(237, 20);
+            this.thicknessCountDown.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.thicknessCountDown.Location = new System.Drawing.Point(265, 37);
             this.thicknessCountDown.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -96,7 +97,7 @@
             0,
             0});
             this.thicknessCountDown.Name = "thicknessCountDown";
-            this.thicknessCountDown.Size = new System.Drawing.Size(123, 43);
+            this.thicknessCountDown.Size = new System.Drawing.Size(95, 33);
             this.thicknessCountDown.TabIndex = 3;
             this.thicknessCountDown.Value = new decimal(new int[] {
             1,
@@ -166,18 +167,30 @@
             // thicknessLabel
             // 
             this.thicknessLabel.AutoSize = true;
-            this.thicknessLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.thicknessLabel.Location = new System.Drawing.Point(133, 30);
+            this.thicknessLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.thicknessLabel.Location = new System.Drawing.Point(265, 14);
             this.thicknessLabel.Name = "thicknessLabel";
-            this.thicknessLabel.Size = new System.Drawing.Size(98, 25);
+            this.thicknessLabel.Size = new System.Drawing.Size(67, 17);
             this.thicknessLabel.TabIndex = 6;
             this.thicknessLabel.Text = "thickness: ";
+            // 
+            // clearButton
+            // 
+            this.clearButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.clearButton.Location = new System.Drawing.Point(132, 20);
+            this.clearButton.Name = "clearButton";
+            this.clearButton.Size = new System.Drawing.Size(44, 34);
+            this.clearButton.TabIndex = 7;
+            this.clearButton.Text = "Clear";
+            this.clearButton.UseVisualStyleBackColor = true;
+            this.clearButton.Click += new System.EventHandler(this.OnClearButtonClick);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(978, 729);
+            this.Controls.Add(this.clearButton);
             this.Controls.Add(this.thicknessLabel);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.goforwardButton);
@@ -206,5 +219,6 @@
         private ListView listView1;
         private Label thicknessLabel;
         private ImageList imageList1;
+        private Button clearButton;
     }
 }

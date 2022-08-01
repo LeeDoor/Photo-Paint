@@ -215,5 +215,11 @@ namespace Photo_paint
 			StepForward();
 			pictureBox.Invalidate();
 		}
+
+        private void OnClearButtonClick(object sender, EventArgs e)
+        {
+			drawingElements.Clear();
+			pictureBox.Invalidate();
+        }
     }
 }
