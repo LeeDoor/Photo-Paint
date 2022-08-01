@@ -56,14 +56,6 @@ namespace Photo_paint
 
 			firstColor = Color.Black;
 			secondColor = Color.White;
-
-			formTypeCombobox.Items.Clear();
-			formTypeCombobox.Items.Add(DrawingType.Line);
-			formTypeCombobox.Items.Add(DrawingType.Rectangle);
-			formTypeCombobox.Items.Add(DrawingType.FilledRectangle);
-			formTypeCombobox.Items.Add(DrawingType.Ellipse);
-			formTypeCombobox.Items.Add(DrawingType.FilledEllipse);
-			formTypeCombobox.Items.Add(DrawingType.Brush);
 		}
 
 		/// <summary>
@@ -116,8 +108,7 @@ namespace Photo_paint
 
 		private void OnMouseDown(object sender, MouseEventArgs e)
 		{
-			if (formTypeCombobox.SelectedItem is not DrawingType type) return;
-
+			var type = (DrawingType)listView1.SelectedItems[0].Index;
 			CutTailElements();
 
 			Brush brush = new SolidBrush(firstColor);

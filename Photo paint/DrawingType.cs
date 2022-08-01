@@ -11,11 +11,11 @@ namespace Photo_paint
     /// </summary>
     public enum DrawingType
     {
-        Line,
-        Rectangle,
-        FilledRectangle,
+        Brush,
         Ellipse,
         FilledEllipse,
-        Brush
+        Rectangle,
+        FilledRectangle,
+        Line
     }
 }
