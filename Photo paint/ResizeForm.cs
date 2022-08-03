@@ -23,7 +23,7 @@ namespace Photo_paint
 
         private void OnAcceptButtonClick(object sender, EventArgs e)
         {
-            Size = new Size((int)widthUpDown.Value, (int)heightUpDown.Value);
+            SetSize = new Size((int)widthUpDown.Value, (int)heightUpDown.Value);
             DialogResult = DialogResult.OK;
             Close();
         }

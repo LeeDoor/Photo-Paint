@@ -158,8 +158,8 @@ namespace Photo_paint
 
 		private void OnMouseDown(object sender, MouseEventArgs e)
 		{
-			if (listView1.SelectedItems.Count <= 0) return;
-			var type = (DrawingType)listView1.SelectedItems[0].Index;
+			if (toolboxListview.SelectedItems.Count <= 0) return;
+			var type = (DrawingType)toolboxListview.SelectedItems[0].Index;
 			CutTailElements();
 
 			(Pen pen1, Pen pen2, SolidBrush brush1) = BrushCreator(e.Button == MouseButtons.Left);
@@ -186,6 +186,20 @@ namespace Photo_paint
 					break;
 				case DrawingType.Eraser:
 					CurDrawingElement = new DrawingBrush(e.Location.X, e.Location.Y, pen2);
+					break;
+				case DrawingType.Text:
+                    if (isDrawing)
+                    {
+						isDrawing = false;
+						break;
+                    }
+					using(StringCreaterForm dialog = new StringCreaterForm())
+                    {
+                        if (dialog.ShowDialog() == DialogResult.OK)
+                        {
+							CurDrawingElement = new DrawingText(dialog.SetText, dialog.SetFont, e.Location.X, e.Location.Y, brush1);
+						}
+                    }
 					break;
 			}
 			isDrawing = true;
@@ -296,19 +310,28 @@ namespace Photo_paint
 
         private void OnResize(object sender, EventArgs e)
         {
-			pictureBox.Width = Width - PADDING;
-			pictureBox.Height = Height - PADDING - TOOLBOX_SIZE;
+			//pictureBox.Width = Width - PADDING;
+			//pictureBox.Height = Height - PADDING - TOOLBOX_SIZE;
 
+			toolboxListview.Width = Width - PADDING - 192;
 		}
 
         private void OnResizeWindowToolStripClick(object sender, EventArgs e)
         {
-			ResizeForm resize = new ResizeForm(Width, Height);
+			ResizeForm resize = new ResizeForm(pictureBox.Width, pictureBox.Height);
 			if(resize.ShowDialog() == DialogResult.OK)
             {
-				Width = resize.Width;
-				Height = resize.Height;
-            }
+				Width =  resize.SetSize.Width;
+				Height = resize.SetSize.Height;
+                if (resize.SetSize.Width < MinimumSize.Width)
+                {
+					pictureBox.Width = resize.SetSize.Width;
+				}
+				if (resize.SetSize.Height < MinimumSize.Height)
+				{
+					pictureBox.Height = resize.SetSize.Height;
+				}
+			}
         }
     }
 }

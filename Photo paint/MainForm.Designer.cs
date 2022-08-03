@@ -36,6 +36,7 @@
             System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("", 2);
             System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("", 3);
             System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("", 6);
+            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("", 7);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.mainColorButton = new System.Windows.Forms.Button();
             this.secondaryColorButton = new System.Windows.Forms.Button();
@@ -43,7 +44,7 @@
             this.thicknessCountDown = new System.Windows.Forms.NumericUpDown();
             this.gobackButton = new System.Windows.Forms.Button();
             this.goforwardButton = new System.Windows.Forms.Button();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.toolboxListview = new System.Windows.Forms.ListView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.thicknessLabel = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -80,7 +81,7 @@
             this.pictureBox.BackColor = System.Drawing.Color.White;
             this.pictureBox.Location = new System.Drawing.Point(12, 137);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(598, 452);
+            this.pictureBox.Size = new System.Drawing.Size(960, 612);
             this.pictureBox.TabIndex = 2;
             this.pictureBox.TabStop = false;
             this.pictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.OnPaint);
@@ -134,28 +135,29 @@
             this.goforwardButton.UseVisualStyleBackColor = true;
             this.goforwardButton.Click += new System.EventHandler(this.OnGoforwardButtonClick);
             // 
-            // listView1
+            // toolboxListview
             // 
-            this.listView1.GroupImageList = this.imageList1;
-            this.listView1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            this.toolboxListview.GroupImageList = this.imageList1;
+            this.toolboxListview.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.toolboxListview.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem1,
             listViewItem2,
             listViewItem3,
             listViewItem4,
             listViewItem5,
             listViewItem6,
-            listViewItem7});
-            this.listView1.LargeImageList = this.imageList1;
-            this.listView1.Location = new System.Drawing.Point(180, 59);
-            this.listView1.MultiSelect = false;
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(430, 72);
-            this.listView1.SmallImageList = this.imageList1;
-            this.listView1.TabIndex = 5;
-            this.listView1.TileSize = new System.Drawing.Size(60, 60);
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Tile;
+            listViewItem7,
+            listViewItem8});
+            this.toolboxListview.LargeImageList = this.imageList1;
+            this.toolboxListview.Location = new System.Drawing.Point(180, 59);
+            this.toolboxListview.MultiSelect = false;
+            this.toolboxListview.Name = "toolboxListview";
+            this.toolboxListview.Size = new System.Drawing.Size(488, 72);
+            this.toolboxListview.SmallImageList = this.imageList1;
+            this.toolboxListview.TabIndex = 5;
+            this.toolboxListview.TileSize = new System.Drawing.Size(60, 60);
+            this.toolboxListview.UseCompatibleStateImageBehavior = false;
+            this.toolboxListview.View = System.Windows.Forms.View.Tile;
             // 
             // imageList1
             // 
@@ -169,6 +171,7 @@
             this.imageList1.Images.SetKeyName(4, "rectangle icon.png");
             this.imageList1.Images.SetKeyName(5, "ellipse icon.png");
             this.imageList1.Images.SetKeyName(6, "eraser icon.png");
+            this.imageList1.Images.SetKeyName(7, "text icon.png");
             // 
             // thicknessLabel
             // 
@@ -186,7 +189,7 @@
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(618, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(984, 24);
             this.menuStrip1.TabIndex = 8;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -233,9 +236,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(618, 601);
+            this.ClientSize = new System.Drawing.Size(984, 761);
             this.Controls.Add(this.thicknessLabel);
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.toolboxListview);
             this.Controls.Add(this.goforwardButton);
             this.Controls.Add(this.gobackButton);
             this.Controls.Add(this.thicknessCountDown);
@@ -244,7 +247,7 @@
             this.Controls.Add(this.secondaryColorButton);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.MinimumSize = new System.Drawing.Size(634, 203);
+            this.MinimumSize = new System.Drawing.Size(350, 250);
             this.Name = "MainForm";
             this.Text = "Photo Paint";
             this.Load += new System.EventHandler(this.MainForm_Load);
@@ -266,7 +269,7 @@
         private NumericUpDown thicknessCountDown;
         private Button gobackButton;
         private Button goforwardButton;
-        private ListView listView1;
+        private ListView toolboxListview;
         private Label thicknessLabel;
         private ImageList imageList1;
         private MenuStrip menuStrip1;

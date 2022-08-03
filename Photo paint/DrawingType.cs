@@ -18,6 +18,6 @@ namespace Photo_paint
         FilledRectangle,
         Line,
         Eraser,
-        Image
+        Text
     }
 }

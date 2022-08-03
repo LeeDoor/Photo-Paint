@@ -49,6 +49,10 @@ namespace Photo_paint
         /// </summary>
         /// <param name="x">x coord</param>
         /// <param name="y">y coord</param>
-        public abstract void SetCoords(int x, int y);
+        public virtual void SetCoords(int x, int y)
+        {
+            X1 = x;
+            Y1 = y;
+        }
     }
 }
