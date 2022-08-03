@@ -6,10 +6,11 @@ namespace Photo_paint
 {
 	public partial class MainForm : Form
 	{
-		/// <summary>
-		/// indentation on the sides of the form
-		/// </summary>
-		const int PADDING = 52;
+        #region variables
+        /// <summary>
+        /// indentation on the sides of the form
+        /// </summary>
+        const int PADDING = 52;
 
 		/// <summary>
 		/// toolbar height
@@ -70,10 +71,12 @@ namespace Photo_paint
 		/// </summary>
 		private float thickness;
 
-		/// <summary>
-		/// constructor
-		/// </summary>
-		public MainForm()
+        #endregion
+
+        /// <summary>
+        /// constructor
+        /// </summary>
+        public MainForm()
 		{
 			InitializeComponent();
 
@@ -85,10 +88,11 @@ namespace Photo_paint
 			secondColor = Color.White;
 		}
 
-		/// <summary>
-		/// adds 1 to border index
-		/// </summary>
-		private void StepBack()
+        #region history moving
+        /// <summary>
+        /// adds 1 to border index
+        /// </summary>
+        private void StepBack()
 		{
 			if (borderIndex < drawingElements.Count)
 			{
@@ -118,8 +122,14 @@ namespace Photo_paint
             }
 			borderIndex = 0; 
 		}
-
-		private (Pen pen1, Pen pen2, SolidBrush brush1) BrushCreator(bool isLeft)
+        #endregion
+        #region drawing screen update
+        /// <summary>
+        /// creates brushes
+        /// </summary>
+        /// <param name="isLeft">is left mouse button clicked</param>
+        /// <returns>returns pens and brush</returns>
+        private (Pen pen1, Pen pen2, SolidBrush brush1) BrushCreator(bool isLeft)
         {
 			//if we press left mouse button, we use first color to draw
 			//else we use second
@@ -155,8 +165,9 @@ namespace Photo_paint
 			mainColorButton.BackColor = firstColor;
 			secondaryColorButton.BackColor = secondColor;
 		}
-
-		private void OnMouseDown(object sender, MouseEventArgs e)
+        #endregion
+        #region mouse events
+        private void OnMouseDown(object sender, MouseEventArgs e)
 		{
 			if (toolboxListview.SelectedItems.Count <= 0) return;
 			var type = (DrawingType)toolboxListview.SelectedItems[0].Index;
@@ -224,8 +235,9 @@ namespace Photo_paint
 				pictureBox.Invalidate();
 			}
 		}
-
-		private void OnSecondaryColorButtonClick(object sender, EventArgs e)
+        #endregion
+        #region color buttons
+        private void OnSecondaryColorButtonClick(object sender, EventArgs e)
 		{
 			ColorDialog dlg = new ColorDialog();
 			if(dlg.ShowDialog() == DialogResult.OK)
@@ -246,7 +258,8 @@ namespace Photo_paint
 				curDrawingElement.Color = firstColor;
 			pictureBox.Invalidate();
 		}
-
+        #endregion
+        #region toolbar buttons
         private void OnThicknessCountDownValueChanged(object sender, EventArgs e)
         {
 			thickness = (float)thicknessCountDown.Value;
@@ -263,7 +276,8 @@ namespace Photo_paint
 			StepForward();
 			pictureBox.Invalidate();
 		}
-
+        #endregion
+        #region tool strips
         private void OnSaveToolStripClick(object sender, EventArgs e)
         {
 			using (SaveFileDialog dialog = new())
@@ -302,12 +316,8 @@ namespace Photo_paint
 			drawingElements.Clear();
 			pictureBox.Invalidate();
 		}
-
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
+        #endregion
+        #region resizing
         private void OnResize(object sender, EventArgs e)
         {
 			//pictureBox.Width = Width - PADDING;
@@ -333,5 +343,6 @@ namespace Photo_paint
 				}
 			}
         }
+        #endregion
     }
 }

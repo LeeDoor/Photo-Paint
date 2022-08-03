@@ -250,7 +250,6 @@
             this.MinimumSize = new System.Drawing.Size(350, 250);
             this.Name = "MainForm";
             this.Text = "Photo Paint";
-            this.Load += new System.EventHandler(this.MainForm_Load);
             this.Resize += new System.EventHandler(this.OnResize);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.thicknessCountDown)).EndInit();
