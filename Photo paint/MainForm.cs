@@ -1,5 +1,6 @@
 using System.Drawing;
 using System.Windows.Input;
+using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace Photo_paint
 {
@@ -218,10 +219,35 @@ namespace Photo_paint
 			pictureBox.Invalidate();
 		}
 
-        private void OnClearButtonClick(object sender, EventArgs e)
+        private void OnSaveToolStripClick(object sender, EventArgs e)
+        {
+			SaveFileDialog dialog = new();
+			dialog.InitialDirectory = "c:\\";
+			dialog.Filter = "png files (*.png)|*.png|All files (*.*)|*.*";
+			dialog.FilterIndex = 0;
+			dialog.RestoreDirectory = true;
+			if (dialog.ShowDialog() == DialogResult.OK)
+			{
+				Bitmap map = new Bitmap(pictureBox.Width, pictureBox.Height);
+				pictureBox.DrawToBitmap(map, new Rectangle(0, 0, pictureBox.Width, pictureBox.Height));
+				map.Save(dialog.FileName);
+			}
+		}
+
+        private void OnOpenToolStripClick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void OnClearToolStripClick(object sender, EventArgs e)
         {
 			drawingElements.Clear();
 			pictureBox.Invalidate();
+		}
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
