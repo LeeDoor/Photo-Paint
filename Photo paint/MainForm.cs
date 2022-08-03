@@ -25,9 +25,25 @@ namespace Photo_paint
 		private DrawingObject? curDrawingElement;
 
 		/// <summary>
-		/// true if we are drawing curDrawingElement rn
+		/// current element we are drawing or editing
 		/// </summary>
-		private bool isDrawing;
+		public DrawingObject? CurDrawingElement
+		{
+			get => curDrawingElement;
+			set
+			{
+				if (value != null)
+				{
+					curDrawingElement = value;
+					drawingElements.Add(curDrawingElement);
+				}
+			}
+		}
+
+        /// <summary>
+        /// true if we are drawing curDrawingElement rn
+        /// </summary>
+        private bool isDrawing;
 
 		/// <summary>
 		/// primary color. needed to draw smth
@@ -134,29 +150,27 @@ namespace Photo_paint
 			switch (type)
 			{
 				case DrawingType.Line:
-					curDrawingElement = new DrawingLine(e.Location.X, e.Location.Y, pen1);
+					CurDrawingElement = new DrawingLine(e.Location.X, e.Location.Y, pen1);
 					break;
 				case DrawingType.Rectangle:
-					curDrawingElement = new DrawingRectangle(e.Location.X, e.Location.Y, pen1);
+					CurDrawingElement = new DrawingRectangle(e.Location.X, e.Location.Y, pen1);
 					break;
 				case DrawingType.FilledRectangle:
-					curDrawingElement = new DrawingFilledRectangle(e.Location.X, e.Location.Y, brush1);
+					CurDrawingElement = new DrawingFilledRectangle(e.Location.X, e.Location.Y, brush1);
 					break;
 				case DrawingType.Ellipse:
-					curDrawingElement = new DrawingEllipse(e.Location.X, e.Location.Y, pen1);
+					CurDrawingElement = new DrawingEllipse(e.Location.X, e.Location.Y, pen1);
 					break;
 				case DrawingType.FilledEllipse:
-					curDrawingElement = new DrawingFilledEllipse(e.Location.X, e.Location.Y, brush1);
+					CurDrawingElement = new DrawingFilledEllipse(e.Location.X, e.Location.Y, brush1);
 					break;
 				case DrawingType.Brush:
-					curDrawingElement = new DrawingBrush(e.Location.X, e.Location.Y, pen1);
+					CurDrawingElement = new DrawingBrush(e.Location.X, e.Location.Y, pen1);
 					break;
 				case DrawingType.Eraser:
-					curDrawingElement = new DrawingBrush(e.Location.X, e.Location.Y, pen2);
+					CurDrawingElement = new DrawingBrush(e.Location.X, e.Location.Y, pen2);
 					break;
 			}
-			if (curDrawingElement != null)
-				drawingElements.Add(curDrawingElement);
 			isDrawing = true;
 			pictureBox.Invalidate();
 		}
@@ -221,23 +235,36 @@ namespace Photo_paint
 
         private void OnSaveToolStripClick(object sender, EventArgs e)
         {
-			SaveFileDialog dialog = new();
-			dialog.InitialDirectory = "c:\\";
-			dialog.Filter = "png files (*.png)|*.png|All files (*.*)|*.*";
-			dialog.FilterIndex = 0;
-			dialog.RestoreDirectory = true;
-			if (dialog.ShowDialog() == DialogResult.OK)
+			using (SaveFileDialog dialog = new())
 			{
-				Bitmap map = new Bitmap(pictureBox.Width, pictureBox.Height);
-				pictureBox.DrawToBitmap(map, new Rectangle(0, 0, pictureBox.Width, pictureBox.Height));
-				map.Save(dialog.FileName);
+				dialog.InitialDirectory = "c:\\";
+				dialog.Filter = "png files (*.png)|*.png|All files (*.*)|*.*";
+				dialog.FilterIndex = 0;
+				dialog.RestoreDirectory = true;
+				if (dialog.ShowDialog() == DialogResult.OK)
+				{
+					Bitmap map = new Bitmap(pictureBox.Width, pictureBox.Height);
+					pictureBox.DrawToBitmap(map, new Rectangle(0, 0, pictureBox.Width, pictureBox.Height));
+					map.Save(dialog.FileName);
+				}
 			}
 		}
 
         private void OnOpenToolStripClick(object sender, EventArgs e)
         {
-
-        }
+			using (OpenFileDialog dialog = new OpenFileDialog())
+			{
+				dialog.InitialDirectory = "c:\\";
+				dialog.Filter = "png files (*.png)|*.png|All files (*.*)|*.*";
+				dialog.FilterIndex = 0;
+				dialog.RestoreDirectory = true;
+				if (dialog.ShowDialog() == DialogResult.OK)
+				{
+					CurDrawingElement = new DrawingImage(dialog.FileName, 0, 0);
+				}
+				pictureBox.Invalidate();
+			}
+		}
 
         private void OnClearToolStripClick(object sender, EventArgs e)
         {
