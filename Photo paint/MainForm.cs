@@ -109,6 +109,29 @@ namespace Photo_paint
 			borderIndex = 0; 
 		}
 
+		private (Pen pen1, Pen pen2, SolidBrush brush1) BrushCreator(bool isLeft)
+        {
+			//if we press left mouse button, we use first color to draw
+			//else we use second
+			SolidBrush brush1;
+			SolidBrush brush2;
+			if (isLeft)
+			{
+				brush1 = new SolidBrush(firstColor);
+				brush2 = new SolidBrush(secondColor);
+			}
+			else
+			{
+				brush1 = new SolidBrush(secondColor);
+				brush2 = new SolidBrush(firstColor);
+			}
+
+			Pen pen1 = new Pen(brush1, thickness);
+			Pen pen2 = new Pen(brush2, thickness);
+
+			return (pen1, pen2, brush1);
+		}
+
 		/// <summary>
 		/// screen update
 		/// </summary>
@@ -128,25 +151,9 @@ namespace Photo_paint
 			if (listView1.SelectedItems.Count <= 0) return;
 			var type = (DrawingType)listView1.SelectedItems[0].Index;
 			CutTailElements();
-			bool isLeft = e.Button == MouseButtons.Left;
 
-			//if we press left mouse button, we use first color to draw
-			//else we use second
-			SolidBrush brush1;
-			SolidBrush brush2;
-			if (isLeft)
-            {
-				brush1 = new SolidBrush(firstColor);
-				brush2 = new SolidBrush(secondColor);
-			}
-            else
-            {
-				brush1 = new SolidBrush(secondColor);
-				brush2 = new SolidBrush(firstColor);
-			}
+			(Pen pen1, Pen pen2, SolidBrush brush1) = BrushCreator(e.Button == MouseButtons.Left);
 
-			Pen pen1 = new Pen(brush1, thickness);
-			Pen pen2 = new Pen(brush2, thickness);
 			switch (type)
 			{
 				case DrawingType.Line:
