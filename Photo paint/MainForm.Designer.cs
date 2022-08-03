@@ -51,6 +51,7 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resizeWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.thicknessCountDown)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -79,7 +80,7 @@
             this.pictureBox.BackColor = System.Drawing.Color.White;
             this.pictureBox.Location = new System.Drawing.Point(12, 137);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(954, 580);
+            this.pictureBox.Size = new System.Drawing.Size(598, 452);
             this.pictureBox.TabIndex = 2;
             this.pictureBox.TabStop = false;
             this.pictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.OnPaint);
@@ -90,7 +91,7 @@
             // thicknessCountDown
             // 
             this.thicknessCountDown.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.thicknessCountDown.Location = new System.Drawing.Point(265, 98);
+            this.thicknessCountDown.Location = new System.Drawing.Point(79, 98);
             this.thicknessCountDown.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -146,10 +147,10 @@
             listViewItem6,
             listViewItem7});
             this.listView1.LargeImageList = this.imageList1;
-            this.listView1.Location = new System.Drawing.Point(366, 59);
+            this.listView1.Location = new System.Drawing.Point(180, 59);
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(600, 72);
+            this.listView1.Size = new System.Drawing.Size(430, 72);
             this.listView1.SmallImageList = this.imageList1;
             this.listView1.TabIndex = 5;
             this.listView1.TileSize = new System.Drawing.Size(60, 60);
@@ -173,7 +174,7 @@
             // 
             this.thicknessLabel.AutoSize = true;
             this.thicknessLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.thicknessLabel.Location = new System.Drawing.Point(265, 75);
+            this.thicknessLabel.Location = new System.Drawing.Point(79, 75);
             this.thicknessLabel.Name = "thicknessLabel";
             this.thicknessLabel.Size = new System.Drawing.Size(67, 17);
             this.thicknessLabel.TabIndex = 6;
@@ -185,7 +186,7 @@
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(978, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(618, 24);
             this.menuStrip1.TabIndex = 8;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -194,7 +195,8 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.saveToolStripMenuItem,
             this.openToolStripMenuItem,
-            this.clearToolStripMenuItem});
+            this.clearToolStripMenuItem,
+            this.resizeWindowToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
@@ -202,29 +204,36 @@
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.OnSaveToolStripClick);
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.OnOpenToolStripClick);
             // 
             // clearToolStripMenuItem
             // 
             this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-            this.clearToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.clearToolStripMenuItem.Text = "Clear";
             this.clearToolStripMenuItem.Click += new System.EventHandler(this.OnClearToolStripClick);
+            // 
+            // resizeWindowToolStripMenuItem
+            // 
+            this.resizeWindowToolStripMenuItem.Name = "resizeWindowToolStripMenuItem";
+            this.resizeWindowToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.resizeWindowToolStripMenuItem.Text = "Resize window";
+            this.resizeWindowToolStripMenuItem.Click += new System.EventHandler(this.OnResizeWindowToolStripClick);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(978, 729);
+            this.ClientSize = new System.Drawing.Size(618, 601);
             this.Controls.Add(this.thicknessLabel);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.goforwardButton);
@@ -235,9 +244,11 @@
             this.Controls.Add(this.secondaryColorButton);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.MinimumSize = new System.Drawing.Size(634, 203);
             this.Name = "MainForm";
-            this.Text = "Form1";
+            this.Text = "Photo Paint";
             this.Load += new System.EventHandler(this.MainForm_Load);
+            this.Resize += new System.EventHandler(this.OnResize);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.thicknessCountDown)).EndInit();
             this.menuStrip1.ResumeLayout(false);
@@ -263,5 +274,6 @@
         private ToolStripMenuItem saveToolStripMenuItem;
         private ToolStripMenuItem openToolStripMenuItem;
         private ToolStripMenuItem clearToolStripMenuItem;
+        private ToolStripMenuItem resizeWindowToolStripMenuItem;
     }
 }

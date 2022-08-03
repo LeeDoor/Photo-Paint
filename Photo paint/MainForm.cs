@@ -7,6 +7,16 @@ namespace Photo_paint
 	public partial class MainForm : Form
 	{
 		/// <summary>
+		/// indentation on the sides of the form
+		/// </summary>
+		const int PADDING = 52;
+
+		/// <summary>
+		/// toolbar height
+		/// </summary>
+		const int TOOLBOX_SIZE = 137;
+
+		/// <summary>
 		/// list of elements we need to draw
 		/// </summary>
 		private List<DrawingObject> drawingElements;
@@ -282,6 +292,23 @@ namespace Photo_paint
         private void MainForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void OnResize(object sender, EventArgs e)
+        {
+			pictureBox.Width = Width - PADDING;
+			pictureBox.Height = Height - PADDING - TOOLBOX_SIZE;
+
+		}
+
+        private void OnResizeWindowToolStripClick(object sender, EventArgs e)
+        {
+			ResizeForm resize = new ResizeForm(Width, Height);
+			if(resize.ShowDialog() == DialogResult.OK)
+            {
+				Width = resize.Width;
+				Height = resize.Height;
+            }
         }
     }
 }
